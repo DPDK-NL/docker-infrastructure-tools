@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage("Build the Image") {
             steps{
+                sh 'ls -la'
                 sh 'docker build -t registry.dpdk.com/docker-jenkins:2.440.2-1 .'
             }
         }
