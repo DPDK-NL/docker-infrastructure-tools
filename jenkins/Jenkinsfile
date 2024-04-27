@@ -1,11 +1,15 @@
 pipeline {
     stages {
         stage("Build the Image") {
-            sh 'docker build -t registry.dpdk.com/docker-jenkins:2.440.2-1 .'
+            steps{
+                sh 'docker build -t registry.dpdk.com/docker-jenkins:2.440.2-1 .'
+            }
         }
 
         stage("Lis images") {
-            sh 'docker images'
+            steps {
+                sh 'docker images'
+            }
         }
     }
 }
