@@ -34,7 +34,7 @@ COPY --from=jre-build /javaruntime ${JAVA_HOME}
 ADD https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.zip /tmp/
 COPY files/d-terraform-entrypoint.sh /usr/bin/entrypoint.sh
 RUN apk add bash curl wget \
-  && /tmp/terraform /usr/sbin/ \
+  && ls /tmp/ \
   && rm -fr /var/cache/apk/*
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 
