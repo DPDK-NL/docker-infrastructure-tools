@@ -17,8 +17,8 @@ pipeline {
 
         stage("Docker cleanup") {
             steps {
-              sh 'docker volume prune'
-              sh "docker rmi \$(docker images | grep '<none>' | awk '{print \$3}')"
+              sh 'echo y | docker volume prune || exit 0'
+              sh "docker rmi \$(docker images | grep '<none>' | awk '{print \$3}') || exit 0"
             }
         }
     }
