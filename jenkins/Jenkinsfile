@@ -9,9 +9,16 @@ pipeline {
             }
         }
 
-        stage("Lis images") {
+        stage("List images") {
             steps {
                 sh 'docker images'
+            }
+        }
+
+        stage("Docker cleanup") {
+            steps {
+              sh 'docker volume prune'
+              sh "docker rmi $(docker images | grep '<none>' | awk '{print $3}')"
             }
         }
     }
