@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage("Build the Image") {
+            steps{
+                dir("base"){
+                    sh 'docker build -t registry.dpdk.com/docker-base:0.0.1 .'
+                }
+            }
+        }
+
+        stage("List images") {
+            steps {
+                sh 'docker images'
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
