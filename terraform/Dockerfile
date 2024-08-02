@@ -33,7 +33,7 @@ ENV JAVA_HOME=/opt/java/openjdk
 COPY --from=jre-build /javaruntime ${JAVA_HOME}
 ADD https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.zip /tmp/
 COPY files/d-terraform-entrypoint.sh /usr/bin/entrypoint.sh
-RUN apk add bash curl wget \
+RUN apk add bash curl wget git \
   && cd /tmp/ && unzip terraform*.zip && mv terraform /usr/sbin/terraform \
   && rm -fr /var/cache/apk/*
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
