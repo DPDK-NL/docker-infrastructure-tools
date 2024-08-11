@@ -1,17 +1,24 @@
 pipeline {
     agent any
     stages {
-        stage("Build the Image") {
-            steps{
-                dir("terraform"){
+        stage('Build the Image') {
+            steps {
+                dir('terraform') {
                     sh 'docker build -t registry.dpdk.com/docker-terraform:1.8.2 .'
                 }
             }
         }
 
-        stage("Lis images") {
+        stage('List images') {
             steps {
                 sh 'docker images'
+            }
+        }
+
+        stage('Docker cleanup') {
+            steps {
+                sh 'echo y | docker volume prune || exit 0'
+                sh "docker rmi \$(docker images | grep '<none>' | awk '{print \$3}') || exit 0"
             }
         }
     }
