@@ -32,8 +32,7 @@ FROM google/cloud-sdk:473.0.0-alpine
 ENV JAVA_HOME=/opt/java/openjdk
 COPY --from=jre-build /javaruntime ${JAVA_HOME}
 ADD https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.zip /tmp/
-ADD https://releases.hashicorp.com/packer/1.11.2/packer_1.11.2_linux_amd64.zip
-/tmp/
+ADD https://releases.hashicorp.com/packer/1.11.2/packer_1.11.2_linux_amd64.zip /tmp/
 COPY files/d-terraform-entrypoint.sh /usr/bin/entrypoint.sh
 RUN apk update && apk add bash curl wget git py3-pip \
   && cd /tmp/ && unzip terraform*.zip && mv terraform /usr/sbin/terraform \
