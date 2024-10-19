@@ -33,7 +33,7 @@ ENV JAVA_HOME=/opt/java/openjdk
 COPY --from=jre-build /javaruntime ${JAVA_HOME}
 ADD https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.zip /tmp/
 COPY files/d-terraform-entrypoint.sh /usr/bin/entrypoint.sh
-RUN apk add bash curl wget git py3-pip packer \
+RUN apk update && apk add bash curl wget git py3-pip packer \
   && cd /tmp/ && unzip terraform*.zip && mv terraform /usr/sbin/terraform \
   && pip install pymongo ansible --break-system-packages \
   && rm -fr /var/cache/apk/*
