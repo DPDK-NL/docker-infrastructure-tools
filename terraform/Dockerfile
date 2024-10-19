@@ -35,8 +35,8 @@ ADD https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.z
 ADD https://releases.hashicorp.com/packer/1.11.2/packer_1.11.2_linux_amd64.zip /tmp/
 COPY files/d-terraform-entrypoint.sh /usr/bin/entrypoint.sh
 RUN apk update && apk add bash curl wget git py3-pip \
-  && cd /tmp/ && unzip terraform*.zip && mv terraform /usr/sbin/terraform \
-  && cd /tmp/ && unzip packer*.zip && mv packer /usr/sbin/terraform \
+  && cd /tmp/ && unzip -o terraform*.zip && mv terraform /usr/sbin/terraform \
+  && cd /tmp/ && unzip -o packer*.zip && mv packer /usr/sbin/packer \
   && pip install pymongo ansible --break-system-packages \
   && rm -fr /var/cache/apk/*
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
