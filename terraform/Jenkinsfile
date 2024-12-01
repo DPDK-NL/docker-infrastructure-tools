@@ -4,7 +4,7 @@ pipeline {
         stage('Build the Image') {
             steps {
                 dir('terraform') {
-                    sh 'docker build -t registry.dpdk.com/docker-terraform:1.8.2 .'
+                    sh 'docker build -t registry.dpdk.com/docker-terraform:1.8.3 .'
                 }
             }
         }

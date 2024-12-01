@@ -37,7 +37,7 @@ COPY files/d-terraform-entrypoint.sh /usr/bin/entrypoint.sh
 RUN apk update && apk add bash curl wget git py3-pip \
   && cd /tmp/ && unzip -o terraform*.zip && mv terraform /usr/sbin/terraform \
   && cd /tmp/ && unzip -o packer*.zip && mv packer /usr/sbin/packer \
-  && pip install ansible google-auth --break-system-packages \
+  && pip install ansible 'google-auth>=2.18.4' 'requests>=1.3.0' --break-system-packages \
   && rm -fr /var/cache/apk/*
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 
