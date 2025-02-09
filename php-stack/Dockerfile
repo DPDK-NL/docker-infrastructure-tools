@@ -83,6 +83,7 @@ RUN apk update && \
     ${PHP_V}-mongodb \
     ${PHP_V}-redis && \
     pip3 install ansible --break-system-packages && \
+    addgroup -g 1000 dpdk && \
     useradd -m -s /bin/bash -u 1000 -U -G dpdk dpdk && \
     rm -fr /var/cache/apk/*
 
