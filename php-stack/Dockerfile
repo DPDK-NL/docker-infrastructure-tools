@@ -1,5 +1,6 @@
 ARG ALPINE_TAG=3.21
-ARG PHP_VERSION=8.3-alpine
+ARG PHP_VERSION=8.3
+ARG PHP_ALPINE=83
 
 FROM alpine:"${ALPINE_TAG}" AS jre-build
 
@@ -27,7 +28,7 @@ RUN jlink \
   --compress=2 \
   --output /javaruntime
 
-FROM php:"${ALPINE_TAG}"
+FROM php:"${PHP_VERSION}-fpm-alpine"
 ENV JHA_HOME=/opt/java/openjdk
 ENV PHP_V="php83"
 COPY --from=jre-build /javaruntime ${JHA_HOME}
