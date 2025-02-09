@@ -32,7 +32,6 @@ FROM php:"${PHP_VERSION}-fpm-alpine"
 ENV JAVA_HOME=/opt/java/openjdk
 ENV PHP_V="php83"
 COPY --from=jre-build /javaruntime ${JAVA_HOME}
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN apk update && \
     apk add --no-cache \
@@ -52,6 +51,8 @@ RUN apk update && \
     git \
     py3-pip \
     ${PHP_V} \
+    ${PHP_V}-apcu \
+    ${PHP_V}-cgi \
     ${PHP_V}-cli \
     ${PHP_V}-ctype \
     ${PHP_V}-curl \
@@ -59,29 +60,34 @@ RUN apk update && \
     ${PHP_V}-fileinfo \
     ${PHP_V}-fpm \
     ${PHP_V}-gd \
+    ${PHP_V}-imagick \
     ${PHP_V}-intl \
     ${PHP_V}-mbstring \
+    ${PHP_V}-memcached \
+    ${PHP_V}-mongodb \
+    ${PHP_V}-mysql \
+    ${PHP_V}-mysqli \
+    ${PHP_V}-mysqlnd \
     ${PHP_V}-opcache \
     ${PHP_V}-openssl \
+    ${PHP_V}-pdo \
+    ${PHP_V}-pdo_mysql \
+    ${PHP_V}-pgsql \
     ${PHP_V}-phar \
+    ${PHP_V}-redis \
     ${PHP_V}-session \
-    ${PHP_V}-tokenizer \
+    ${PHP_V}-simplexml \
     ${PHP_V}-soap \
+    ${PHP_V}-soap \
+    ${PHP_V}-sqlite3 \
+    ${PHP_V}-tokenizer \
     ${PHP_V}-xml \
     ${PHP_V}-xmlreader \
     ${PHP_V}-xmlwriter \
-    ${PHP_V}-simplexml \
-    ${PHP_V}-zip \
-    ${PHP_V}-pdo \
-    ${PHP_V}-pdo_sqlite \
-    ${PHP_V}-sqlite3 \
-    ${PHP_V}-pdo_mysql \
-    ${PHP_V}-mysqlnd \
-    ${PHP_V}-mysqli \
-    ${PHP_V}-pdo_pgsql \
-    ${PHP_V}-pgsql \
-    ${PHP_V}-mongodb \
-    ${PHP_V}-redis && \
+    ${PHP_V}-xsl \
+    ${PHP_V}-zip && \
+    curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php; \
+    php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
     pip3 install ansible --break-system-packages && \
     addgroup -g 1000 dpdk && \
     adduser -s /bin/bash -u 1000 -S -G dpdk dpdk && \
