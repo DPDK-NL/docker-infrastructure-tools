@@ -83,8 +83,9 @@ RUN apk update && \
     ${PHP_V}-mongodb \
     ${PHP_V}-redis && \
     pip3 install ansible --break-system-packages && \
+    user add -m -s /bin/bash -u 1000 -U -G dpdk dpdk && \
     rm -fr /var/cache/apk/*
 
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
-USER root
+USER dpdk
 ENTRYPOINT [ "" ]
