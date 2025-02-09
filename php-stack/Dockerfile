@@ -86,4 +86,5 @@ RUN apk update && \
     rm -fr /var/cache/apk/*
 
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
+USER root
 ENTRYPOINT [ "" ]
