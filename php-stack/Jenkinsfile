@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build the Image') {
+            steps {
+                dir('php-stack') {
+                    sh 'docker build -t registry.dpdk.com/docker-php-stack:8.3 .'
+                }
+            }
+        }
+
+        stage('List images') {
+            steps {
+                sh 'docker images'
+            }
+        }
+
+        stage('Docker cleanup') {
+            steps {
+                sh 'echo y | docker volume prune || exit 0'
+                sh "docker rmi \$(docker images | grep '<none>' | awk '{print \$3}') || exit 0"
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
