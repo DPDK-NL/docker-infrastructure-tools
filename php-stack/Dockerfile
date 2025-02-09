@@ -50,6 +50,7 @@ RUN apk update && \
     zip \
     git \
     py3-pip \
+    sshpass \
     ${PHP_V} \
     ${PHP_V}-apcu \
     ${PHP_V}-cgi \
