@@ -29,9 +29,9 @@ RUN jlink \
   --output /javaruntime
 
 FROM php:"${PHP_VERSION}-fpm-alpine"
-ENV JHA_HOME=/opt/java/openjdk
+ENV JAVA_HOME=/opt/java/openjdk
 ENV PHP_V="php83"
-COPY --from=jre-build /javaruntime ${JHA_HOME}
+COPY --from=jre-build /javaruntime ${JAVA_HOME}
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN apk update && \
