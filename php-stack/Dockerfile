@@ -83,6 +83,7 @@ RUN apk update && \
     ${PHP_V}-xmlwriter \
     ${PHP_V}-xsl \
     ${PHP_V}-zip && \
+    docker-php-ext-install pdo pdo_mysql gd && \
     curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php; \
     php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
     pip3 install ansible --break-system-packages && \
