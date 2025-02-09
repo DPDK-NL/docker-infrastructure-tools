@@ -60,12 +60,9 @@ RUN apk update && \
     ${PHP_V}-fileinfo \
     ${PHP_V}-fpm \
     ${PHP_V}-gd \
-    ${PHP_V}-imagick \
     ${PHP_V}-intl \
     ${PHP_V}-mbstring \
-    ${PHP_V}-memcached \
     ${PHP_V}-mongodb \
-    ${PHP_V}-mysql \
     ${PHP_V}-mysqli \
     ${PHP_V}-mysqlnd \
     ${PHP_V}-opcache \
