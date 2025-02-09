@@ -84,7 +84,7 @@ RUN apk update && \
     ${PHP_V}-redis && \
     pip3 install ansible --break-system-packages && \
     addgroup -g 1000 dpdk && \
-    adduser -m -s /bin/bash -u 1000 -U -G dpdk dpdk && \
+    adduser -s /bin/bash -u 1000 -S -G dpdk dpdk && \
     rm -fr /var/cache/apk/*
 
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
